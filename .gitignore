@@ -1,0 +1,22 @@
+node_modules/
+dist/
+build/
+.cache/
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.env.local
+venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+
+.vscode/
+.idea/
+*~
+
+# Docker
+*.log
