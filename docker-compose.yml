@@ -1,0 +1,39 @@
+services:
+  backend:
+    build:
+      context: ./edutest_pro
+      dockerfile: Dockerfile
+    container_name: edutest_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./edutest_pro:/app
+    env_file:
+      - ./edutest_pro/.env
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./edutest-front
+      dockerfile: Dockerfile
+    container_name: edutest_frontend
+    ports:
+      - "3000:80"  # предполагаем, что React дев-сервер на 3000
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:16-alpine
+    container_name: edutest_db
+    restart: always
+    env_file:
+      - ./edutest_pro/.env
+    ports:
+      - "5438:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+
